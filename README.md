@@ -1,119 +1,220 @@
 # ROI Investment Calculator for Nonprofits
 
-A simple web-based investment calculator built with **FastAPI** and a lightweight frontend using **HTML + JavaScript (Chart.js)**.
+A web-based investment calculator built with **FastAPI** and a lightweight frontend using **HTML, CSS, and JavaScript (Chart.js)**.
 
-It helps users understand how their investments can potentially grow over time, and it also highlights how additional funding generated from investment growth can translate into **real-world impact.**
-
----
-
-## Features
-
-### Investment Modeling
-- Calculates investment growth over time from:
-  - Initial investment
-  - Expected annual rate of return
-  - Investment duration
-  - Recurring contributions (monthly or annual)
-- Displays:
-  - Final portfolio value
-  - Total invested funds
-  - Additional funding generated (investment growth)
-  - **Impact Translation (Optional)**
-      - Convert investment growth into real-world outcomes
-      - User-defined inputs:
-          - Impact type (e.g. meals, trees, scholarships)
-          - Cost per unit
-      - Output:
-          - Estimated number of impact units funded by investment growth
-          - Example: $5,000 in investment growth → 100 meals funded (at $50/meal)
-      - *Fully optional — core investment calculations work independently*
-  - **Growth Chart**
-      - Interactive growth chart that comares total invested capital and total portfolio value over time
+This tool helps users understand how investments grow over time and how that growth can translate into **real-world impact** for nonprofit missions.
 
 ---
 
-## How It Works
+## 🚀 Live Demo
 
-The calculator simulates investment growth over time:
+*Deployed on Vercel*
+👉 https://your-app.vercel.app
 
-1. You start with an initial investment
-2. You optionally add recurring contributions
-3. Your balance grows based on an assumed annual return
+---
+
+## ✨ Features
+
+### 📈 Investment Modeling
+
+* Simulates investment growth based on:
+
+  * Initial investment
+  * Expected annual rate of return
+  * Investment duration
+  * Recurring contributions (monthly or annual)
+
+* Outputs:
+
+  * Final portfolio value
+  * Total invested funds
+  * Investment growth (additional funding generated)
+
+---
+
+### 🌍 Impact Translation (Optional)
+
+* Converts financial growth into real-world outcomes
+
+* User-defined inputs:
+
+  * Impact type (e.g., meals, trees, scholarships)
+  * Cost per unit
+
+* Output:
+
+  * Estimated number of impact units funded
+
+**Example:**
+
+> $5,000 in growth → 100 meals funded (at $50/meal)
+
+* Fully optional — core calculations work independently
+
+---
+
+### 📊 Growth Visualization
+
+* Interactive chart comparing:
+
+  * Total invested capital
+  * Total portfolio value over time
+
+---
+
+## 🧠 How It Works
+
+1. Start with an initial investment
+2. Add optional recurring contributions
+3. Apply an assumed annual return
 4. The system calculates:
-   - Total contributions
-   - Growth from compounding
-   - Final portfolio value
 
-> Note: The model assumes **annual compounding of returns**.
+   * Total contributions
+   * Compound growth
+   * Final portfolio value
 
-### Impact Layer (Optional)
+> ⚠️ Assumes **annual compounding of returns**
+
+---
+
+### Impact Layer
 
 If enabled:
 
-1. User defines an impact type and cost per unit
-2. The system translates investment growth into:
-   - Number of units funded *(growth ÷ cost per unit)*
+* Growth is converted into impact units using:
+
+```
+impact_units = growth / cost_per_unit
+```
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 ### Backend
-- FastAPI
-- Pydantic
+
+* FastAPI
+* Pydantic
 
 ### Frontend
-- HTML
-- CSS
-- Vanilla JavaScript
-- Chart.js
+
+* HTML
+* CSS
+* Vanilla JavaScript
+* Chart.js
 
 ---
 
-## Installation
+## 📁 Project Structure
 
-### Clone the Repository
+```
+.
+├── api/
+│   ├── index.py
+│   └── calculation_functions.py
+├── requirements.txt
+├── vercel.json
+└── README.md
+```
+
+---
+
+## ⚙️ Local Development
+
+### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/your-username/roi-calculator.git
 cd roi-calculator
 ```
 
-### Create Virtual Environment
-```python -m venv venv
+### 2. Create Virtual Environment
+
+```bash
+python -m venv venv
 source venv/bin/activate   # Mac/Linux
 venv\Scripts\activate      # Windows
 ```
 
-### Install Dependendicies
-```pip install -r requirements.txt```
+### 3. Install Dependencies
 
-### Run the App
-```uvicorn main:app --reload```
-Run the above line in Terminal, and then open the link.
+```bash
+pip install -r requirements.txt
+```
 
-### Notes
-- Assumes annual compounding of returns
-- Assumes that contributions happen at the end of the period
-- Impact estimates are user-defined and illustrative, not exact projections
-- Designed for:
-    - Financial education
-    - Nonprofit storytelling
+### 4. Run the App
 
-### Future Improvements
-- Validation and error handling improvements
-  - Issues:
-      - Currently, if users hit "Calculate" with an invalid input, the tool will do nothing. There is no message letting them know what the issue is.
-      - For the annual return, they should really only be allowed to enter in a number > 1 since the backend assumes a percentage and then converts to a decimal.
-  - Fix:
-      - Proivde clear error messaging when inputs are invalid or missing (e.g., “Please enter a valid number of years” instead of doing nothing)
-      - Enforce input constraints:
-          - Annual return > 0
-          - Years > 0
-          - No negative contributions
-- Input experience and formatting
-  - Standardize input behavior across fields:
-      - Currency fields → support commas (1,000)
-      - Numeric fields (years, rate) → clean number inputs without formatting conflicts
-  - Remove inconsistent UI elements (e.g., browser up/down arrows on some inputs)
-- State persistance
-  - Preserve results on page reload
+```bash
+uvicorn api.index:app --reload
+```
+
+Then open:
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+## ☁️ Deployment (Vercel)
+
+This project is configured for deployment on **Vercel** using serverless functions.
+
+### Steps:
+
+1. Push your project to GitHub
+2. Import the repository into Vercel
+3. Deploy
+
+### Key Configuration:
+
+* FastAPI is wrapped using `Mangum`
+* Entry point: `api/index.py`
+* Routing handled via `vercel.json`
+
+---
+
+## ⚠️ Notes
+
+* Assumes annual compounding
+* Contributions occur at the end of each period
+* Impact estimates are illustrative, not exact projections
+
+---
+
+## 🔮 Future Improvements
+
+### Input Validation
+
+* Add error messaging for invalid inputs
+* Enforce constraints:
+
+  * Annual return > 0
+  * Years > 0
+  * No negative contributions
+
+---
+
+### UX Improvements
+
+* Standardize input formatting:
+
+  * Currency → comma support (1,000)
+  * Numeric → clean inputs
+* Remove inconsistent browser input UI elements
+
+---
+
+### State Persistence
+
+* Preserve inputs and results on page reload
+
+---
+
+## 🎯 Use Cases
+
+* Financial education
+* Nonprofit storytelling
+* Impact-focused investment exploration
+
+---
