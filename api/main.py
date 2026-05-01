@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
-from api.calculation_functions import calculate_investment, generate_schedule, translate_impact
+from calculation_functions import calculate_investment, generate_schedule, translate_impact
 from typing import Optional
 from mangum import Mangum
 
