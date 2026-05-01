@@ -1,6 +1,5 @@
 from typing import Dict, List, Optional
 
-
 FREQUENCY_MAP = {
     "annual": 1,
     "monthly": 12
