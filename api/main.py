@@ -48,7 +48,7 @@ def calculate(data: InvestmentRequest):
 
 @app.get("/", response_class=HTMLResponse)
 def root():
-    return """
+    return r"""
     <html>
     <head>
         <title>ROI Calculator</title>
